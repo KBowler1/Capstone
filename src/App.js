@@ -5,6 +5,7 @@ import Home from './Home';
 import PlayGame from './PlayGame';
 import Scores from './Scores';
 import AboutUs from './AboutUs';
+import './index.css';
 
 const App = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -15,10 +16,14 @@ const App = () => {
         <Router>
             <div className="App">
                 <header className="App-header">
-                    <h1>Welcome to Jeopardy!</h1>
-                    <button onClick={toggleMenu}>Menu</button>
+                    
+                        <div>
+                            <Menu />
+                        </div>
+                    
+                   {/* <button onClick={toggleMenu}>Menu</button>*/}
                 </header>
-                <Menu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+                {/*<Menu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />*/}
 
                 <Routes>
                     <Route path="/" element={<Home />} />

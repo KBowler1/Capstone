@@ -1,19 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
+import { CgMenuRound } from "react-icons/cg";
+import './navstyle.css'
 
-const Menu = ({ isOpen, onClose }) => {
+function NavBar() {
+    const [nav, setNav]= useState(false)
+    const actionNav =()=> setNav(!nav)
     return (
-        <div style={{ display: isOpen ? 'block' : 'none' }}>
-            <button onClick={onClose}>X</button>
-            <ul>
+        <div className='navbar'>
+            
+            <div className="logo">
+               <h2>KAN Jeopardy</h2>
+            </div>
+            <ul className="nav-menu">
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/play">Play Game</Link></li>
                 <li><Link to="/scores">Scores</Link></li>
                 <li><Link to="/about">About Us</Link></li>
-                {/* Add other menu items here */}
             </ul>
+            <div className="nav-icons" onClick={actionNav}>
+                <CgMenuRound className='icon' />
+            </div>
+            <div className= {nav ? 'mobmenu active' : 'mobmenu'}>
+            <ul className="nav-mob">
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/play">Play Game</Link></li>
+                <li><Link to="/scores">Scores</Link></li>
+                <li><Link to="/about">About Us</Link></li>
+            </ul>
+            </div>
         </div>
-    );
-};
-
-export default Menu;
+    )
+}
+export default NavBar;

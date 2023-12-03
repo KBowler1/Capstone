@@ -1,12 +1,11 @@
-// src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css'; // Only if you have a CSS file to include
 import App from './App';
+import { ScoreProvider } from './ScoreContext';
 
 ReactDOM.render(
-    <React.StrictMode>
+    <ScoreProvider>
         <App />
-    </React.StrictMode>,
+    </ScoreProvider>,
     document.getElementById('root')
 );
