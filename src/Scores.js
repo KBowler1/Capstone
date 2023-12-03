@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './Scores.css';
 const Scores = () => {
-    const [scores, setScores] = useState([]); // This will hold the score data
+    const [leaderboard, setLeaderboard] = useState([]);
 
     useEffect(() => {
-        // Fetch scores from your backend or state management and set them
-        // For example, using a static array for demonstration:
-        setScores([
-            { name: 'Player1', score: 200 },
-            { name: 'Player2', score: 150 },
-            // Add more scores
-        ]);
+        // Fetch leaderboard data from the server
+        axios.get('http://localhost:3001/api/leaderboard')
+            .then(response => {
+                // Handle the response data and set it to state
+                const leaderboardData = response.data;
+                setLeaderboard(leaderboardData);
+            })
+            .catch(error => {
+                console.error('Error fetching leaderboard data:', error);
+            });
     }, []);
 
     return (
@@ -24,10 +28,10 @@ const Scores = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {scores.map((score, index) => (
+                {leaderboard.map((entry, index) => (
                     <tr key={index}>
-                        <td>{score.name}</td>
-                        <td>{score.score}</td>
+                        <td>{entry.name}</td>
+                        <td>{entry.score}</td>
                     </tr>
                 ))}
                 </tbody>
