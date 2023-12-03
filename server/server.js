@@ -2,15 +2,33 @@ const express = require('express');
 const sqlite3 = require('sqlite3');
 const path = require('path');
 const cors = require('cors');
-
+const playerScores = [];
 const app = express();
-const port = 3001; // Different from your React app's port
-
+const port = 3001; // Different from the React app's port
+app.get('/api/leaderboard', (req, res) => {
+    // Retrieve leaderboard data from your data source (e.g., a database)
+    // Respond with the leaderboard data in JSON format
+    const leaderboardData = [
+        { name: 'Player 1', score: 100 },
+        { name: 'Player 2', score: 75 },
+        { name: 'Player 3', score: 50 },
+        { name: 'Player 4', score: 25 },
+    ];
+    res.json(leaderboardData);
+});
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // For parsing application/json
+app.post('/api/scores', (req, res) => {
+    const { initials, score } = req.body;
 
-// Setup SQLite database
-const dbPath = path.resolve(__dirname, 'your-database-name.db');
+    // Store the received data locally (in-memory)
+    playerScores.push({ initials, score });
+
+    // Respond with a success message or appropriate status code
+    res.json({ message: 'Score saved locally' });
+});
+// Setup for the SQLite database
+const dbPath = path.resolve(__dirname, 'capstone.db');
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
         console.error(err.message);
@@ -23,7 +41,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
 app.get('/', (req, res) => {
     res.send('Jeopardy Word Search Game Server is running!');
 });
-// Initialize database with tables
+// Initialize the database with tables
 function initializeDatabase() {
     db.run(`CREATE TABLE IF NOT EXISTS categories (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
