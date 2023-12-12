@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap");
+
+div2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+h3 {
+    font-family: 'Rubik Bubbles', sans-serif;
+    font-size: 25px;
+    color: #c34abf;
+    margin-bottom: 5px;
+    margin-top: 60px;
+    animation: fadeIn 1s ease-in-out;
+    
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+p {
+    
+    color: #333;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    
+}
+
+p1 {
+    color: rgb(255, 140, 0);
+    text-decoration: underline rgb(204, 0, 255);
+    margin-bottom: 0px;
+    margin-top: 5px;
+    font-weight: bold;
+}
